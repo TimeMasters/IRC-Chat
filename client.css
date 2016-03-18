@@ -1,0 +1,45 @@
+#messages
+{
+    padding: 0px;
+    margin:auto;
+    overflow:auto;
+}
+
+li
+{
+    list-style:none;
+}
+
+li:nth-child(odd)
+{
+    color: black;
+    background-color:#fff;
+    text-align:left;
+}
+li:nth-child(even)
+{
+    
+    color: black;
+    background-color:#fff;
+    text-align:left;
+}
+
+#chat
+{
+    margin-left:5%;
+    margin-right:20%;
+
+}
+
+#envoi_msg{
+    width:80%;
+    position:relative;
+}
+
+#saisie{
+    width:80%;
+    position:fixed;
+    
+}
+
+

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Chat</title>
+        <link rel="stylesheet" href="client.css">
+    </head>
+    <h1> Canal de discussion</h1></br>
+    <body id="chat">
+        <!--<div id="choixAlias">
+            <form>
+                <input focus autocomplete="off" id="validAli">
+                <button>send</button>
+            </form>
+        </div>-->
+        <div id="affichage">
+            <ul id="messages"></ul>
+        </div>
+        <div id="saisie">
+            <form>
+                <input autocomplete="off" id="envoi_pseudo" placeholder="pseudo" value="Anonyme"/>
+                <input focus autocomplete="off" id="envoi_msg" placeholder="message"/>
+                <button>Envoi</button>
+            </form>
+        </div>
+        <!--<script src="serveur.js"></script>-->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script>
+            $("#envoi_msg").focus();
+
+            //Initialisation du socket
+            var socket = io.connect('https://fistmachine-soulmourne.c9users.io/');
+        
+            //Ajoute les messages a la liste
+            function add_message(msg) {
+                $('#messages').append('<li>'+msg+'</li>');
+            }
+            socket.on('chat message', add_message);
+            
+            //S'active lors de l'envoi d'un message
+            $('#chat').submit(function() {
+               message = $("#envoi_pseudo").val() + " : " + $("#envoi_msg").val();
+               socket.emit('chat message', message);  //Récupere la valeur de l'input et l'envoie
+               add_message(message); //Ajoute le message a la liste sur la page personnelle
+               $("#envoi_msg").val(""); //Reinitialise l'input à vide
+               return false; 
+            });
+        </script>
+    </body>
+</html>
